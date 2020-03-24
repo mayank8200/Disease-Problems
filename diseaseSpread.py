@@ -3,6 +3,7 @@ import numpy as np
 data1 = pd.read_csv('dengue_features_train.csv')
 data2 = pd.read_csv('dengue_labels_train.csv')
 data3 = pd.read_csv('dengue_features_test.csv')
+j=data1.corr()
 y = data2.iloc[:,-1].values
 X=pd.concat([data1.iloc[:, 0], data1.iloc[:, 4:]],axis=1).to_numpy()
 #X = data1.iloc[:,4:].values
@@ -29,20 +30,20 @@ X=onehotencoder.fit_transform(X).toarray()
 
 #dividing the dataset into train and test set
 
-"""from sklearn.model_selection import train_test_split
-X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=1)"""
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=1)
 
 from sklearn.ensemble import RandomForestRegressor
 regressor = RandomForestRegressor(n_estimators=300,random_state=0)
 regressor.fit(X,y)
 
 # Predicting a new result
-X_test = pd.concat([data3.iloc[:, 0], data3.iloc[:, 4:]],axis=1).to_numpy()
+'''X_test = pd.concat([data3.iloc[:, 0], data3.iloc[:, 4:]],axis=1).to_numpy()
 imputer=imputer.fit(X_test[:,1:])
 X_test[:,1:]=imputer.transform(X_test[:,1:])
 X_test[:,0]=labelencoder_X.fit_transform(X_test[:,0])
 onehotencoder=OneHotEncoder(categorical_features=[0])
-X_test=onehotencoder.fit_transform(X_test).toarray()
+X_test=onehotencoder.fit_transform(X_test).toarray()'''
 y_pred = regressor.predict(X_test)
 y_pred = np.round_(y_pred) 
 
