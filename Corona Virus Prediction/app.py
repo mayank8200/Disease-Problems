@@ -17,21 +17,18 @@ def predict():
     For rendering results on HTML GUI
     '''
     f_date=date(2020,1,22)
-    int_features1=[]
-    int_features = [str(x) for x in request.form.values()]
-    int_features = int_features[0]
-    int_features = int_features.split("/")
-    for i in int_features:
-       int_features1.append(int(i)) 
+    features = [str(x) for x in request.form.values()]
+    features = features[0]
+    features = features.split("/")
+    
 
-    l_date=date(int_features1[2],int_features1[1],int_features1[0])
+    l_date=date(int(features[2]),int(features[1]),int(features[0]))
     delta = l_date - f_date
-    final_features = [np.array(delta)]
-    prediction = model.predict(final_features)
+    prediction = model.predict([[delta.days]])
+    prediction1 = model1.predict([[delta.days]])
+    prediction2 = model2.predict([[delta.days]])
 
-    output = round(prediction[0]*100000, 2)
-
-    return render_template('index.html', prediction_text=int_features)
+    return render_template('index.html', prediction_text=int(prediction1))
 @app.route('/visual')
 def visual():
     return render_template('visualize.html')
