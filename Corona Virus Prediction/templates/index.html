@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Predict Your Housing Price</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+  
+<style>
+  ::placeholder {
+    color:rgb(13, 13, 14);
+    opacity:0.8; /* Firefox */
+    font-weight: bold;
+  }
+  </style>
+
+</head>
+<body style="background-image: url('{{ url_for('static', filename='corona3.jpg') }}'); 
+background-repeat:no-repeat;
+background-size:cover;
+height:100vh;
+display:flex;
+">
+<marquee direction="left"><h3>Predicting the death number confirmed and number of recovered people until the date you will enter.</h3></marquee>
+<pre>
+<br>
+ <div class="login card">
+	<h1>People Suffering From</h1><h1>Corona</h1>
+     <!-- Main Input For Receiving Query to our ML --><form name="myform" action="{{ url_for('predict')}}"method="post" onsubmit="return(validateform());">
+<input type="text" style="background-color:rgba(219, 228, 236,0.5)" name="Enter The Date" placeholder="Enter The Date" required="required" /><br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        <br>
+        <!--<a href="visual" class="btn btn-primary btn-block btn-large" style="text-decoration: none;">Visualize</a>-->
+    </form>
+   <br>
+   
+ </div>
+
+</pre>
+</body>
+{{ prediction_text1}}
+<h2>{{ prediction_text }}</h2>
+   {{ prediction_text2}}
+</html>
