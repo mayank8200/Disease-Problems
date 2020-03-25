@@ -1,6 +1,8 @@
 import numpy as np 
 import pandas as pd
 import datetime
+import pickle
+
 
 confirmed_data = pd.read_csv('time_series_19-covid-Confirmed.csv')
 death_data = pd.read_csv('time_series_19-covid-Deaths.csv')
@@ -61,3 +63,10 @@ y_pred_deaths = regressor1.predict(future_forcast)
 regressor2 = SVR(shrinking=True, kernel='poly',gamma=0.01, epsilon=1,degree=5, C=0.1)
 regressor2.fit(days_since_1_22,world_recovered)
 y_pred_recovered = regressor2.predict(future_forcast)
+
+filename = 'model.pkl'
+pickle.dump(regressor, open(filename, 'wb'))
+filename = 'model1.pkl'
+pickle.dump(regressor1, open(filename, 'wb'))
+filename = 'model2.pkl'
+pickle.dump(regressor2, open(filename, 'wb'))

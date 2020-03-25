@@ -5,17 +5,21 @@ import pickle
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
+model1 = pickle.load(open('model1.pkl', 'rb'))
+model2 = pickle.load(open('model2.pkl', 'rb'))
+
 @app.route('/')
 def home():
     return render_template('index.html')
 @app.route('/predict',methods=['POST'])
-f_date = date(2020, 1, 22)
 def predict():
     '''
     For rendering results on HTML GUI
     '''
+    f_date=date(2020,1,22)
     int_features1=[]
-    int_features = request.form.values()
+    int_features = [str(x) for x in request.form.values()]
+    int_features = int_features[0]
     int_features = int_features.split("/")
     for i in int_features:
        int_features1.append(int(i)) 
@@ -27,7 +31,7 @@ def predict():
 
     output = round(prediction[0]*100000, 2)
 
-    return render_template('index.html', prediction_text='House Price Should Be Rs {}'.format(output),prediction_text1 = "Hello",prediction_text2 = "World")
+    return render_template('index.html', prediction_text=int_features)
 @app.route('/visual')
 def visual():
     return render_template('visualize.html')
