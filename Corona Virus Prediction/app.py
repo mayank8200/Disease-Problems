@@ -28,7 +28,7 @@ def predict():
     prediction1 = model1.predict([[delta.days]])
     prediction2 = model2.predict([[delta.days]])
 
-    return render_template('index.html', prediction_text=int(prediction),prediction_text1=int(prediction1),prediction_text2=int(prediction2))
+    return render_template('index.html', prediction_text="Total number of Confirmed Cases: {}".format(int(prediction)),prediction_text1="Total number of Death: {}".format(int(prediction1)),prediction_text2="Total number of Recover Patients: {}".format(int(prediction2)))
 @app.route('/visual')
 def visual():
     return render_template('visualize.html')
