@@ -4,9 +4,9 @@ from datetime import date
 import pickle
 
 app = Flask(__name__)
-model = pickle.load(open('model.pkl', 'rb'))
-model1 = pickle.load(open('model1.pkl', 'rb'))
-model2 = pickle.load(open('model2.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb')) #confirm
+model1 = pickle.load(open('model1.pkl', 'rb')) #death
+model2 = pickle.load(open('model2.pkl', 'rb')) #recover
 
 @app.route('/')
 def home():
@@ -28,7 +28,7 @@ def predict():
     prediction1 = model1.predict([[delta.days]])
     prediction2 = model2.predict([[delta.days]])
 
-    return render_template('index.html', prediction_text=int(prediction1))
+    return render_template('index.html', prediction_text=int(prediction),prediction_text1=int(prediction1),prediction_text2=int(prediction2))
 @app.route('/visual')
 def visual():
     return render_template('visualize.html')
