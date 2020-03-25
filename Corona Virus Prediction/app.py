@@ -2,6 +2,7 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template
 from datetime import date
 import pickle
+import re
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb')) #confirm
@@ -22,13 +23,21 @@ def predict():
     if re.match(r"[\d]{1,2}/[\d]{1,2}/[\d]{4}", features):
         features = features.split("/")
         
-        if(!(int(features[1])<=4)):
-        return render_template('index.html',prediction_text="Month should be upto April")  
+        if(int(features[0])<=31):
+            pass
+        else:
+            return render_template('index.html',prediction_text="Date should be upto 31")
+        
+        if(int(features[1])<=4):
+            pass
+        else:
+            return render_template('index.html',prediction_text="Month should be upto April")  
 
-        if(!(int(features[2])==2020)):
-        return render_template('index.html',prediction_text="Year should be 2020")
-    
-        continue
+        if(int(features[2])==2020):
+            pass
+        else:
+            return render_template('index.html',prediction_text="Year should be 2020")
+        pass
         
     else:
         return render_template('index.html',prediction_text="Date should be in format dd/mm/yyyy")
