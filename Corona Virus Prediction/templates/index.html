@@ -31,14 +31,13 @@ display:flex;
 <pre>
 <br>
  <div class="login card">
-	<center><p class="raj">People Suffering From Corona</p></center>
+	<center><p class="raj" style="font-size: 30px">Corona Analytics</p></center>
      <!-- Main Input For Receiving Query to our ML --><form name="myform" action="{{ url_for('predict')}}"method="post" onsubmit="return(validateform());">
 <input type="text" style="background-color:rgba(219, 228, 236,0.5)" name="Enter The Date" placeholder="Enter The Date (dd/mm/yyyy)" required="required" /><br>
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
         <br>
         <!--<a href="visual" class="btn btn-primary btn-block btn-large" style="text-decoration: none;">Visualize</a>-->
     </form>
-   <br>
     <p class="raj1">{{ prediction_text}}<br>{{ prediction_text1}}<br>{{ prediction_text2}}</p> 
 	
  </div>
