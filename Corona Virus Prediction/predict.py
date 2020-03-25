@@ -25,7 +25,8 @@ world_cases = np.array(world_cases).reshape(-1, 1)
 
 
 days_in_future = 10
-future_forcast = np.array([i for i in range(len(dates)+days_in_future)]).reshape(-1, 1)
+c = len(dates)
+future_forcast = np.array([i+c for i in range(days_in_future)]).reshape(-1, 1)
 adjusted_dates = future_forcast[:-10]
 
 
@@ -41,3 +42,4 @@ X_train_confirmed, X_test_confirmed, y_train_confirmed, y_test_confirmed = train
 from sklearn.svm import SVR
 regressor = SVR(shrinking=True, kernel='poly',gamma=0.01, epsilon=1,degree=5, C=0.1)
 regressor.fit(X_train_confirmed,y_train_confirmed)
+y_pred = regressor.predict(future_forcast)
