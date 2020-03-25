@@ -19,7 +19,19 @@ def predict():
     f_date=date(2020,1,22)
     features = [str(x) for x in request.form.values()]
     features = features[0]
-    features = features.split("/")
+    if re.match(r"[\d]{1,2}/[\d]{1,2}/[\d]{4}", features):
+        features = features.split("/")
+        
+        if(!(int(features[1])<=4)):
+        return render_template('index.html',prediction_text="Month should be upto April")  
+
+        if(!(int(features[2])==2020)):
+        return render_template('index.html',prediction_text="Year should be 2020")
+    
+        continue
+        
+    else:
+        return render_template('index.html',prediction_text="Date should be in format dd/mm/yyyy")
     
 
     l_date=date(int(features[2]),int(features[1]),int(features[0]))
